@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {IQuestionAndAnswers} from '@app/features/home/chat/question-and-answers/question-and-answers.component';
+import {ChatService} from '@app/features/home/chat/chat.service';
 
 @Component({
   selector: 'app-chat',
@@ -9,9 +10,13 @@ import {IQuestionAndAnswers} from '@app/features/home/chat/question-and-answers/
 export class ChatComponent implements OnInit {
   public inputText = '';
   public questionAndAnswers: IQuestionAndAnswers[] = [];
-  constructor() { }
+  constructor(private chatService: ChatService) { }
 
   ngOnInit() {
+    this.questionAndAnswers = [];
+    this.chatService.questionAndAnswers$.subscribe( (data: IQuestionAndAnswers[]) => {
+      this.questionAndAnswers = data;
+    });
   }
 
   public onSubmit(): void {
@@ -20,10 +25,7 @@ export class ChatComponent implements OnInit {
   }
 
   private addQuestion(question: string) {
-    this.questionAndAnswers.push({
-      question: question,
-      answers: ['testy']
-    });
+    this.chatService.getReply(question);
   }
 }
 

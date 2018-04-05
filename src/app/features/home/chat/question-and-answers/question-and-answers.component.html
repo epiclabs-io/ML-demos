@@ -8,7 +8,7 @@
     </span>
   </div>
 </div>
-<div *ngIf="!questionAndAnswers.answers" class="loading row">
+<div *ngIf="!questionAndAnswers.answers || questionAndAnswers.answers.length == 0" class="loading row">
   <div class="col-1">
     <mat-spinner [diameter]="50"></mat-spinner>
   </div>
