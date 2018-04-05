@@ -3,7 +3,7 @@
   <!-- sidebar -->
   <mat-sidenav mode="over" #sidenav>
     <mat-nav-list>
-      <h3>{{title}}</h3>
+      <img [src]="logoPath">
       <a mat-list-item (click)="sidenav.close()" *ngFor="let section of sections" [routerLink]="section.route" routerLinkActive="font-weight-bold">
         {{section.title}}
       </a>
@@ -21,7 +21,7 @@
             <button mat-icon-button class="d-md-none" (click)="sidenav.open()">
               <i class="material-icons">menu</i>
             </button>
-            <span class="title">{{title}}</span>
+            <img [src]="logoPath">
             <button mat-button *ngFor="let section of sections" [routerLink]="section.route" routerLinkActive="font-weight-bold"
                     class="d-none d-md-inline nav-button mat-button">{{section.title}}</button>
           </mat-toolbar-row>

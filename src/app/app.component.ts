@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
   animations: [routerTransition],
 })
 export class AppComponent {
-  title = 'Project X';
+  logoPath = '/assets/imgs/epic_labs_logo_145x55.png';
   year = (new Date).getFullYear();
 
   sections = [
