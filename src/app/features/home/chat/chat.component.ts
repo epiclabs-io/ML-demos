@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {IQuestionAndAnswers} from '@app/features/home/chat/question-and-answers/question-and-answers.component';
 
 @Component({
   selector: 'app-chat',
@@ -7,14 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatComponent implements OnInit {
   public inputText = '';
-  public questionAndAnswers: IQuestionAndAnswer[] = [];
+  public questionAndAnswers: IQuestionAndAnswers[] = [];
   constructor() { }
 
   ngOnInit() {
   }
 
   public onSubmit(): void {
-    console.log(this.inputText);
     this.addQuestion(this.inputText);
     this.inputText = '';
   }
@@ -27,7 +27,4 @@ export class ChatComponent implements OnInit {
   }
 }
 
-export interface IQuestionAndAnswer {
-  question: string;
-  answers: string[];
-}
+

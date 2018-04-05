@@ -1,0 +1,27 @@
+<div class="row question qa">
+  <div class="col-1">
+    <img class="img-fluid" src="/assets/imgs/profile_pic.jpeg" />
+  </div>
+  <div class="col-11">
+    <span>
+      {{questionAndAnswers.question}}
+    </span>
+  </div>
+</div>
+<div *ngIf="!questionAndAnswers.answers" class="loading row">
+  <div class="col-1">
+    <mat-spinner [diameter]="50"></mat-spinner>
+  </div>
+</div>
+<div *ngIf="questionAndAnswers.answers">
+  <div class="answers row qa" *ngFor="let answer of questionAndAnswers.answers">
+    <div class="col-1">
+      <img class="img-fluid" src="/assets/imgs/bot1.png" />
+    </div>
+    <div class="col-11">
+      <span>
+        {{answer}}
+      </span>
+    </div>
+  </div>
+</div>
