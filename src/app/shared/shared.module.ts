@@ -16,6 +16,7 @@ import { AdvancedTableComponent } from './angular-advanced-table/advanced-table/
 import { AdvancedTableHeaderComponent } from './angular-advanced-table/advanced-table-header/advanced-table-header.component';
 import { AdvancedTableBodyComponent } from './angular-advanced-table/advanced-table-body/advanced-table-body.component';
 import { AdvancedTableFooterComponent } from './angular-advanced-table/advanced-table-footer/advanced-table-footer.component';
+import {MatInputModule} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -49,6 +50,7 @@ import { AdvancedTableFooterComponent } from './angular-advanced-table/advanced-
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
+    MatInputModule,
     AngularFontAwesomeModule,
     AppRoutingModule,
 
