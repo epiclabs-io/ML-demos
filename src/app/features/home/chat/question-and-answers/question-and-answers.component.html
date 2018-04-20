@@ -14,9 +14,9 @@
   </div>
 </div>
 <div *ngIf="questionAndAnswers.answers">
-  <div class="answers row qa" *ngFor="let answer of questionAndAnswers.answers">
+  <div class="answers row qa" *ngFor="let answer of questionAndAnswers.answers; let i = index">
     <div class="col-1">
-      <img class="img-fluid" src="/assets/imgs/bot1.png" />
+      <img class="img-fluid" [src]="imgForBotAtIndex(i)" />
     </div>
     <div class="col-11">
       <span>

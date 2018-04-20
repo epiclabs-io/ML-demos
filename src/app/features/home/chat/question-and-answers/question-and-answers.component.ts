@@ -12,6 +12,10 @@ export class QuestionAndAnswersComponent implements OnInit {
   ngOnInit() {
   }
 
+  public imgForBotAtIndex(index: number) {
+    return `/assets/imgs/bot${index}.png`;
+  }
+
 }
 
 export interface IQuestionAndAnswers {
