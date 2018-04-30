@@ -1,8 +1,5 @@
-import {Component, Directive, DoCheck, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {IScoreTS, SmokerServiceService} from "@app/features/smoker-detector/smoker-service.service";
-import {promise} from "selenium-webdriver";
-import {TimeInterval} from "rxjs/operator/timeInterval";
-import {elementStart} from "@angular/core/src/render3/instructions";
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {IScoreTS, SmokerServiceService} from '@app/features/smoker-detector/smoker-service.service';
 
 
 @Component({
@@ -16,8 +13,8 @@ export class PlayerComponent implements OnInit {
   private scores: IScoreTS[];
   private closestFrame: IScoreTS;
   private interval: any;
-  public score: number = 0.0;
-  public warning: boolean = false;
+  public score = 0.0;
+  public warning = false;
   constructor(private smokerService: SmokerServiceService) { }
   @ViewChild('player') player;
   @Output() warningExport = new EventEmitter<boolean>();
@@ -39,13 +36,13 @@ export class PlayerComponent implements OnInit {
 
 
 
-  private async loadVideo(url: string): Promise<void>{
+  private async loadVideo(url: string): Promise<void> {
     this._youtubeURL = url;
     this.player.nativeElement.load();
     await this.player.nativeElement.play();
     this.interval = setInterval( () => {
-      if (!this.player.nativeElement.ended){
-        let time = this.player.nativeElement.currentTime;
+      if (!this.player.nativeElement.ended) {
+        const time = this.player.nativeElement.currentTime;
         this.closestFrame = this.getClosestFrame(time);
         if (this.closestFrame){
           console.log(time, this.closestFrame.time);
@@ -53,8 +50,7 @@ export class PlayerComponent implements OnInit {
           this.warning = this.score > 75.0;
           this.warningExport.emit(this.warning);
         }
-      }
-      else {
+      } else {
         clearInterval(this.interval);
       }
     }, 500);
