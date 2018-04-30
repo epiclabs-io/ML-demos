@@ -1,0 +1,18 @@
+{
+  "learning_rate": 0.003,
+  "training_epochs": 2,
+  "keep_prob": 0.6,
+  "conv_regularization_beta": 0.0,
+  "threshold": 0.5,
+  "batch_size": 10,
+  "n_classes": 1,
+  "test_accuracy_step": 1,
+  "width": 320,
+  "height": 320,
+  "depth": 3,
+  "train_dataset": "train_224_m.tfrecords",
+  "test_dataset": "test_224_m.tfrecords",
+  "tensorboard": "tensorboard/",
+  "gpu_proportion": 1,
+  "model_name": "gpu_1"
+}

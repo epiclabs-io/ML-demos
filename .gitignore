@@ -43,3 +43,13 @@ testem.log
 .DS_Store
 Thumbs.db
 epic-ml-ui.iml
+
+# Processer Files
+**/*.mp4
+**/*.pyc
+**/*.pb
+backend/smoker-detector/saves/
+backend/smoker-detector/static/
+backend/smoker-detector/tmp/
+backend/smoker-detector/tmp-output/
+backend/smoker-detector/retrained_labels.txt
