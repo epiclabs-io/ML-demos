@@ -183,16 +183,6 @@ def after_request(response):
     return response
 
 
-@app.route('/static/css/<path:path>')
-def send_css(path):
-    return send_from_directory('static/css', path)
-
-
-@app.route('/static/js/<path:path>')
-def send_js(path):
-    return send_from_directory('static/js', path)
-
-
 @app.route('/static/videos/<path:path>')
 def send_video(path):
     return send_from_directory('static/video', path)
