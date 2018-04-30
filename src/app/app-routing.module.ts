@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { homeRoutes } from './features/home/home.routes';
-import { componentsRoutes } from './features/components/components.routes';
-import { dummyRoutes } from './features/dummy/dummy.routes';
+import { smokerDetectorRoutes} from '@app/features/smoker-detector/smoker-detector.routes';
 
 const routes: Routes = [
   {
@@ -12,8 +11,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   ...homeRoutes,
-  ...componentsRoutes,
-  ...dummyRoutes,
+  ...smokerDetectorRoutes,
   {
     path: '**',
     redirectTo: 'home',

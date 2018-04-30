@@ -16,7 +16,7 @@ import { AdvancedTableComponent } from './angular-advanced-table/advanced-table/
 import { AdvancedTableHeaderComponent } from './angular-advanced-table/advanced-table-header/advanced-table-header.component';
 import { AdvancedTableBodyComponent } from './angular-advanced-table/advanced-table-body/advanced-table-body.component';
 import { AdvancedTableFooterComponent } from './angular-advanced-table/advanced-table-footer/advanced-table-footer.component';
-import {MatInputModule, MatProgressSpinnerModule, MatSpinner} from '@angular/material';
+import {MatInputModule, MatProgressBarModule, MatProgressSpinnerModule, MatSpinner} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -52,6 +52,7 @@ import {MatInputModule, MatProgressSpinnerModule, MatSpinner} from '@angular/mat
     MatToolbarModule,
     MatInputModule,
     MatProgressSpinnerModule,
+    MatProgressBarModule,
     AngularFontAwesomeModule,
     AppRoutingModule,
 

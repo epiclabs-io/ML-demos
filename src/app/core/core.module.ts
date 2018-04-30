@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 
-import { DummyService } from './services/dummy.service';
 import {HeadersInterceptor} from '@app/core/injectables/headers-interceptor';
 
 /** Http interceptor providers in outside-in order */
@@ -23,7 +22,6 @@ export const httpInterceptorProviders = [
   declarations: [
   ],
   providers: [
-    DummyService,
     httpInterceptorProviders
   ],
 })
