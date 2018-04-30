@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {SmokerServiceService} from "@app/features/smoker-detector/smoker-service.service";
+import {SmokerServiceService} from '@app/features/smoker-detector/smoker-service.service';
 
 @Component({
   selector: 'app-url-box',

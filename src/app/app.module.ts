@@ -9,11 +9,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SmokerDetectorComponent } from './features/smoker-detector/smoker-detector.component';
-import { UrlBoxComponent } from './features/smoker-detector/url-box/url-box.component';
 import { PlayerComponent } from './features/smoker-detector/player/player.component';
-import {SmokerServiceService} from '@app/features/smoker-detector/smoker-service.service';
+import { SmokerServiceService } from '@app/features/smoker-detector/smoker-service.service';
 import { MetadataEnhancementComponent } from './features/metadata-enhancement/metadata-enhancement.component';
-import {MetadataServiceService} from '@app/features/metadata-enhancement/metadata-service.service';
+import { MetadataServiceService } from '@app/features/metadata-enhancement/metadata-service.service';
+import {UrlBoxComponent} from '@app/features/smoker-detector/url-box/url-box.component';
 
 @NgModule({
   imports: [
