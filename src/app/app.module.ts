@@ -13,7 +13,7 @@ import { PlayerComponent } from './features/smoker-detector/player/player.compon
 import { SmokerServiceService } from '@app/features/smoker-detector/smoker-service.service';
 import { MetadataEnhancementComponent } from './features/metadata-enhancement/metadata-enhancement.component';
 import { MetadataServiceService } from '@app/features/metadata-enhancement/metadata-service.service';
-import {UrlBoxComponent} from '@app/features/smoker-detector/url-box/url-box.component';
+import { UrlBoxComponent } from '@app/features/smoker-detector/url-box/url-box.component';
 
 @NgModule({
   imports: [

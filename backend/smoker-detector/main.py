@@ -4,7 +4,6 @@ import youtube_dl
 import redis
 import re
 import json
-import time
 
 real_path = os.path.realpath(__file__)
 base_dir = real_path[:real_path.rfind("/")]
@@ -20,10 +19,12 @@ from time import gmtime, strftime
 import csv
 
 parser = argparse.ArgumentParser(description="Alerts if the video has smokers.")
-parser.add_argument('-f', '--fps', default='2', help='Number of thumbnails per second that will be analyzed from the video')
+parser.add_argument('-f', '--fps', default='2',
+                    help='Number of thumbnails per second that will be analyzed from the video')
 parser.add_argument('-t', '--test', action='store_true', help='Test mode flag')
-parser.add_argument('-i', '--inception', action='store_true', help='If this flag is active an inception model will be used'
-                                                                   'instead of our own model.')
+parser.add_argument('-i', '--inception', action='store_true',
+                    help='If this flag is active an inception model will be used'
+                    'instead of our own model.')
 args = parser.parse_args()
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  # Suppress tensorflow's compilation warnings
@@ -88,7 +89,6 @@ def classify_batch(batch):
     else:
         if len(batch) != 0:
             res = dragon_model.run_score(batch)
-
     return res
 
 
@@ -97,7 +97,6 @@ def index():
     return render_template('main.html')
 
 
-@app.route('/', methods=['POST'])
 @app.route('/api/v1/processVideo', methods=['POST'])
 def handle_url():
     global semaphore
@@ -128,7 +127,6 @@ def handle_url():
     ffmpeg_thread = Thread(target=get_frames(video_name, args.fps), args=())
     ffmpeg_thread.start()
     return Response(json.dumps(app.config['video']), mimetype="application/json")
-    # return render_template('index.html', config=app.config)
 
 
 def start_classification():

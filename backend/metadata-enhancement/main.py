@@ -9,8 +9,7 @@ import json
 import youtube_dl
 import argparse
 import redis
-import gensim
-
+from threading import Thread
 real_path = os.path.realpath(__file__)
 base_dir = real_path[:real_path.rfind("/")]
 sys.path.append(base_dir + '/..')
@@ -49,7 +48,8 @@ for elem in os.listdir("static/video/tmp/"):
         os.remove("static/video/tmp" + elem)
 
 fps = args.fps
-
+global semaphore
+semaphore = False
 # Start and clean Redis server
 tag_buffer_db = redis.StrictRedis(host='localhost', port=6379, db=0, charset="utf-8", decode_responses=True)
 summary = redis.StrictRedis(host='localhost', port=6379, db=1, charset="utf-8", decode_responses=True)
@@ -75,7 +75,7 @@ with slim.arg_scope(arg_scope):
 
 print("------ The Graph is ready ------")
 
-model = gensim.models.KeyedVectors.load_word2vec_format(word_to_vec_file, binary=True)
+# model = gensim.models.KeyedVectors.load_word2vec_format(word_to_vec_file, binary=True)
 
 print("------ The Model is ready ------")
 
@@ -160,13 +160,15 @@ def main():
     return render_template('main.html')
 
 
-@app.route('/', methods=['POST'])
+@app.route('/api/v1/processVideo', methods=['POST'])
 def handle_url():
+    global semaphore
+    semaphore = False
     tag_buffer_db.flushdb()
     summary.flushdb()
     total_tags.flushdb()
     clear_tmp_images()
-    video_url = request.form['video']
+    video_url = request.json['video']
     video_name = video_url[video_url.rfind('?v=') + 3:]
     app.config['video'] = video_name + '.mp4'
     cached = False
@@ -175,10 +177,8 @@ def handle_url():
         if video[:video.rfind(".")] == video_name:
             print("------ The video is already cached ------")
             cached = True
-    if not cached:
-        ydl_opts = {'outtmpl': 'static/video/tmp/video.%(format)s', 'format': 'mp4[height<=720p]'}
-        with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-            ydl.download([video_url])
+        if not cached:
+            download_video(video_url, {'outtmpl': 'static/video/tmp/video.%(format)s', 'format': 'mp4[height<=720p]'})
         video_tmp = os.listdir("static/video/tmp/")[0]
         os.rename("static/video/tmp/" + video_tmp, "static/video/tmp/video.mp4")
         if os.listdir("static/video/tmp")[0] != "video.mp4":
@@ -186,8 +186,11 @@ def handle_url():
                       + video_name + ".mp4")
         else:
             os.rename("static/video/tmp/video.mp4", "static/video/" + video_name + ".mp4")
-    os.system("ffmpeg -i static/video/" + video_name + ".mp4 -vf fps=" + args.fps + " -q:v 1 " + "tmp/%06d.jpg")
-    return render_template('index.html', config=app.config)
+    classification_thread = Thread(target=start_classification, args=())
+    classification_thread.start()
+    ffmpeg_thread = Thread(target=get_frames(video_name, args.fps), args=())
+    ffmpeg_thread.start()
+    return Response(json.dumps(app.config['video']), mimetype="application/json")
 
 
 @app.route("/api/v1/startClassification", methods=['POST'])
@@ -240,7 +243,7 @@ def return_edl():
 
 @app.route("/api/v1/taxonomy", methods=["POST"])
 def taxonomy():
-    tax_id = request.form["id"]
+    tax_id = request.json["id"]
     if tax_id == "tax-0":
         tax_id = "tax-1"
     result = find_most_similar(tax_id)
@@ -256,7 +259,8 @@ def find_most_similar(tax_id):
         tag_ = tag.split(",")[0].split(" ")[-1].lower()
         for word in tax[tax_id]:
             try:
-                tax_[word] += float(model.similarity(word, tag_)) * float(summary.get(tag))
+                # tax_[word] += float(model.similarity(word, tag_)) * float(summary.get(tag))
+                tax_[word] += 0
             except KeyError:
                 pass
     for word in tax_.keys():
@@ -264,19 +268,28 @@ def find_most_similar(tax_id):
     return tax_
 
 
-@app.route('/static/css/<path:path>')
-def send_css(path):
-    return send_from_directory('static/css', path)
-
-
-@app.route('/static/js/<path:path>')
-def send_js(path):
-    return send_from_directory('static/js', path)
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+    return response
 
 
 @app.route('/static/videos/<path:path>')
 def send_video(path):
     return send_from_directory('static/video', path)
+
+
+def download_video(video_url, ydl_opts):
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        ydl.download([video_url])
+
+
+def get_frames(video_name, fps):
+    os.system("ffmpeg -i static/video/" + video_name + ".mp4 -vf fps=" + fps + " -q:v 1 " + "tmp/%06d.jpg")
+    global semaphore
+    semaphore = True
 
 
 if __name__ == "__main__":

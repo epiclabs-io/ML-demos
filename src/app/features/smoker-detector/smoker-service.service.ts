@@ -7,7 +7,7 @@ export class SmokerServiceService {
   private apiUrl = 'http://localhost:6006/api/v1/';
   private scores: IScoreTS[] = [];
   public youtubeURL$ = new BehaviorSubject<string>('');
-  public scores$ = new BehaviorSubject<IScoreTS[]>([])
+  public scores$ = new BehaviorSubject<IScoreTS[]>([]);
   constructor(private http: HttpClient) { }
 
   public postUrl (url: string): void {

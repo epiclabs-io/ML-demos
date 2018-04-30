@@ -55,3 +55,5 @@ backend/smoker-detector/static/
 backend/smoker-detector/tmp/
 backend/smoker-detector/tmp-output/
 backend/smoker-detector/retrained_labels.txt
+backend/metadata-enhancement/tmp/
+backend/metadata-enhancement/tmp-output/
