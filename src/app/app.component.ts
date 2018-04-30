@@ -17,6 +17,9 @@ export class AppComponent {
     }, {
       route: '/smokerDetector',
       title: 'Smoker Detector'
+    }, {
+      route: '/metadataEnhancement',
+      title: 'Metadata Enhancement'
     }
   ];
 }

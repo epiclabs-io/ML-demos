@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { homeRoutes } from './features/home/home.routes';
 import { smokerDetectorRoutes} from '@app/features/smoker-detector/smoker-detector.routes';
+import { metadataEnhancementRoutes} from '@app/features/metadata-enhancement/metadata-enhancement.routes';
 
 const routes: Routes = [
   {
@@ -12,6 +13,7 @@ const routes: Routes = [
   },
   ...homeRoutes,
   ...smokerDetectorRoutes,
+  ...metadataEnhancementRoutes,
   {
     path: '**',
     redirectTo: 'home',
