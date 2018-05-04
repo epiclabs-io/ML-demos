@@ -131,14 +131,12 @@ def handle_url():
 
 def start_classification():
     print("-------- Starting classification --------")
-    listdir = os.listdir("tmp")
-    print("Listed tmp, size", len(listdir))
     date_n_time = strftime("%Y-%m-%d %H:%M:%S", gmtime())
     with open("tmp-output/classifier" + date_n_time + ".csv", 'w') as csvfile:
         scorewriter = csv.writer(csvfile, delimiter=';',
                                  quotechar='|', quoting=csv.QUOTE_MINIMAL)
         j = 0
-        while not semaphore or len(sorted(os.listdir("tmp"), key=number_key)) > 0:
+        while not semaphore or len(os.listdir("tmp")) > 0:
             data = sorted(os.listdir("tmp"), key=number_key)
             batch = get_batch(data)
             if len(batch):

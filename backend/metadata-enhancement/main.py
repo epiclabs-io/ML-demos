@@ -202,12 +202,9 @@ def start_classification():
             image_path = data[0]
             res = classify_image("tmp/" + image_path)
             time_stamp = (i / float(fps))
-            if not tag_buffer_db.set(i, json.dumps(["{0:.4f}".format(time_stamp), res])):
+            if not tag_buffer_db.set(i, json.dumps({'time': "{0:.4f}".format(time_stamp), 'tags': res})):
                 print("An error occurred and the dictionary could not be saved")
             os.remove("tmp/" + image_path)
-            total_tags_to_order = {}
-            for tag in summary.keys():
-                total_tags_to_order[tag] = "{0:.6f}".format(float(summary.get(tag)))
             i += 1
     global semaphore
     semaphore = False
