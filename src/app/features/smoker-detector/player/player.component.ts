@@ -56,7 +56,7 @@ export class PlayerComponent implements OnInit {
     }, 500);
   }
 
-  private getClosestFrame(playerTime: number): IScoreTS{
+  private getClosestFrame(playerTime: number): IScoreTS {
     return this.scores.find((score) => {
       return Math.abs(parseFloat(score.time) - playerTime) < 0.25;
     });

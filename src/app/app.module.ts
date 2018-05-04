@@ -14,6 +14,8 @@ import { SmokerServiceService } from '@app/features/smoker-detector/smoker-servi
 import { MetadataEnhancementComponent } from './features/metadata-enhancement/metadata-enhancement.component';
 import { MetadataServiceService } from '@app/features/metadata-enhancement/metadata-service.service';
 import { UrlBoxComponent } from '@app/features/smoker-detector/url-box/url-box.component';
+import { MetadataPlayerComponent } from './features/metadata-enhancement/metadata-player/metadata-player.component';
+import { MetadataUrlBoxComponent } from './features/metadata-enhancement/metadata-url-box/metadata-url-box.component';
 
 @NgModule({
   imports: [
@@ -34,6 +36,6 @@ import { UrlBoxComponent } from '@app/features/smoker-detector/url-box/url-box.c
   ],
   providers: [SmokerServiceService, MetadataServiceService],
   bootstrap: [AppComponent],
-  declarations: [AppComponent, SmokerDetectorComponent, UrlBoxComponent, PlayerComponent, MetadataEnhancementComponent],
+  declarations: [AppComponent, SmokerDetectorComponent, UrlBoxComponent, PlayerComponent, MetadataEnhancementComponent, MetadataPlayerComponent, MetadataUrlBoxComponent],
 })
 export class AppModule { }

@@ -177,8 +177,8 @@ def handle_url():
         if video[:video.rfind(".")] == video_name:
             print("------ The video is already cached ------")
             cached = True
-        if not cached:
-            download_video(video_url, {'outtmpl': 'static/video/tmp/video.%(format)s', 'format': 'mp4[height<=720p]'})
+    if not cached:
+        download_video(video_url, {'outtmpl': 'static/video/tmp/video.%(format)s', 'format': 'mp4[height<=720p]'})
         video_tmp = os.listdir("static/video/tmp/")[0]
         os.rename("static/video/tmp/" + video_tmp, "static/video/tmp/video.mp4")
         if os.listdir("static/video/tmp")[0] != "video.mp4":
@@ -193,7 +193,6 @@ def handle_url():
     return Response(json.dumps(app.config['video']), mimetype="application/json")
 
 
-@app.route("/api/v1/startClassification", methods=['POST'])
 def start_classification():
     print("-------- Starting classification --------")
     for i, image_path in enumerate(sorted(os.listdir("tmp"), key=number_key)):
@@ -260,7 +259,7 @@ def find_most_similar(tax_id):
         for word in tax[tax_id]:
             try:
                 # tax_[word] += float(model.similarity(word, tag_)) * float(summary.get(tag))
-                tax_[word] += 0
+                print("11")
             except KeyError:
                 pass
     for word in tax_.keys():

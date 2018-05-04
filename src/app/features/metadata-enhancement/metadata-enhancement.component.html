@@ -8,9 +8,19 @@
           <mat-card-content>
             <div class="row">
               <div class="col-5">
-                <app-url-box></app-url-box>
+                <app-metadata-url-box></app-metadata-url-box>
+                <div class="row">
+                  <div class="col-2"></div>
+                    <div class="col-4">
+                       <!--tag Cloud will be here-->
+                    </div>
+                    </div>
+                  <div class="col-6"></div>
+                </div>
               </div>
-            </div>
+              <div class="col-7">
+                <app-metadata-player *ngIf="youtubeURL" class="embed-responsive embed-responsive-16by9"></app-metadata-player>
+              </div>
           </mat-card-content>
         </mat-card>
       </div>
