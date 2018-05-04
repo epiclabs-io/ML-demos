@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {SmokerServiceService} from '@app/features/smoker-detector/smoker-service.service';
+import { SmokerServiceService } from '@app/features/smoker-detector/smoker-service.service';
 
 @Component({
   selector: 'app-smoker-detector',
@@ -17,7 +17,7 @@ export class SmokerDetectorComponent implements OnInit {
     });
   }
 
-  public exportWarning(warning:boolean){
+  public exportWarning(warning: boolean) {
     this.warning = warning;
   }
 

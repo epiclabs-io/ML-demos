@@ -214,7 +214,7 @@ def return_classification():
     for key in tag_buffer_db.keys():
         response.append(json.loads(tag_buffer_db.get(key)))
     response = json.dumps(response)
-    return Response(response.replace("\'", "\""), mimetype="application/json")
+    return Response(response, mimetype="application/json")
 
 
 @app.route('/api/v1/returnRelevantTags', methods=['POST'])

@@ -19,7 +19,7 @@
                 </div>
               </div>
               <div class="col-7">
-                <app-metadata-player *ngIf="youtubeURL" class="embed-responsive embed-responsive-16by9"></app-metadata-player>
+                <app-metadata-player *ngIf="youtubeURL" [youtubeURL]="youtubeURL" class="embed-responsive embed-responsive-16by9"></app-metadata-player>
               </div>
           </mat-card-content>
         </mat-card>

@@ -19,11 +19,11 @@ export class PlayerComponent implements OnInit {
   @ViewChild('player') player;
   @Output() warningExport = new EventEmitter<boolean>();
   @Input()
-  set youtubeURL(youtubeURL: string){
+  set youtubeURL(youtubeURL: string) {
     setTimeout( this.loadVideo.bind(this, youtubeURL), 5000);
     this.smokerService.returnClassification();
   }
-  get youtubeURL(): string{
+  get youtubeURL(): string {
     return this._youtubeURL;
   }
 
@@ -33,7 +33,6 @@ export class PlayerComponent implements OnInit {
       this.scores = value;
     });
   }
-
 
 
   private async loadVideo(url: string): Promise<void> {

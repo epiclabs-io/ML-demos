@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MetadataServiceService} from '@app/features/metadata-enhancement/metadata-service.service';
+import { MetadataServiceService } from '@app/features/metadata-enhancement/metadata-service.service';
 
 @Component({
   selector: 'app-metadata-url-box',

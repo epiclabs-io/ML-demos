@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import {IScoreTS} from '@app/features/smoker-detector/smoker-service.service';
 
 @Injectable()
 export class MetadataServiceService {

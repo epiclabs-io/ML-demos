@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MetadataServiceService } from '@app/features/metadata-enhancement/metadata-service.service';
 
 @Component({
   selector: 'app-metadata-enhancement',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MetadataEnhancementComponent implements OnInit {
 
-  constructor() { }
-
+  public youtubeURL: string;
+  constructor(private metadataService: MetadataServiceService) { }
   ngOnInit() {
+    this.metadataService.youtubeURL$.subscribe((value: string) => {
+      this.youtubeURL = value;
+    });
   }
 
 }

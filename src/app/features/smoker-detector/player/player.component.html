@@ -1,4 +1,4 @@
-  <video [ngClass]="{'isWarning': warning}" #player id="video" class="embed-responsive-item">
-    <source id="video_src" *ngIf="youtubeURL" [src]="youtubeURL" type="video/mp4">
-  </video>
-  <mat-progress-bar *ngIf="youtubeURL" mode="determinate" [value]="score" class="mt-5" color="accent"></mat-progress-bar>
+<video [ngClass]="{'isWarning': warning}" #player id="video" class="embed-responsive-item">
+  <source id="video_src" *ngIf="youtubeURL" [src]="youtubeURL" type="video/mp4">
+</video>
+<mat-progress-bar *ngIf="youtubeURL" mode="determinate" [value]="score" class="mt-5" color="accent"></mat-progress-bar>
