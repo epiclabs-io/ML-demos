@@ -195,26 +195,35 @@ def handle_url():
 
 def start_classification():
     print("-------- Starting classification --------")
-    for i, image_path in enumerate(sorted(os.listdir("tmp"), key=number_key)):
-        res = classify_image("tmp/" + image_path)
-        time_stamp = (i / float(fps))
-        if not tag_buffer_db.set(i, json.dumps(["{0:.4f}".format(time_stamp), res])):
-            print("An error occurred and the dictionary could not be saved")
-        os.remove("tmp/" + image_path)
+    i = 0
+    while not semaphore or len(os.listdir("tmp")) > 0:
+        data = sorted(os.listdir("tmp"), key=number_key)
+        if len(data):
+            image_path = data[0]
+            res = classify_image("tmp/" + image_path)
+            time_stamp = (i / float(fps))
+            if not tag_buffer_db.set(i, json.dumps(["{0:.4f}".format(time_stamp), res])):
+                print("An error occurred and the dictionary could not be saved")
+            os.remove("tmp/" + image_path)
+            total_tags_to_order = {}
+            for tag in summary.keys():
+                total_tags_to_order[tag] = "{0:.6f}".format(float(summary.get(tag)))
+            i += 1
+    global semaphore
+    semaphore = False
     print("All images classified")
-    total_tags_to_order = {}
-    for tag in summary.keys():
-        total_tags_to_order[tag] = "{0:.6f}".format(float(summary.get(tag)))
-    return Response(json.dumps(sorted(total_tags_to_order.items(), key=operator.itemgetter(1), reverse=True)))
+    # return Response(json.dumps(sorted(total_tags_to_order.items(), key=operator.itemgetter(1), reverse=True)))
 
 
 @app.route("/api/v1/returnClassification", methods=['POST'])
 def return_classification():
-    response = []
+    response = {}
+    scores = []
     for key in tag_buffer_db.keys():
-        response.append(json.loads(tag_buffer_db.get(key)))
-    response = json.dumps(response)
-    return Response(response, mimetype="application/json")
+        scores.append(json.loads(tag_buffer_db.get(key)))
+    response['scores'] = scores
+    response['classification'] = semaphore
+    return Response(json.dumps(response).replace("\'", "\""), mimetype="application/json")
 
 
 @app.route('/api/v1/returnRelevantTags', methods=['POST'])
@@ -258,8 +267,7 @@ def find_most_similar(tax_id):
         tag_ = tag.split(",")[0].split(" ")[-1].lower()
         for word in tax[tax_id]:
             try:
-                # tax_[word] += float(model.similarity(word, tag_)) * float(summary.get(tag))
-                print("11")
+                tax_[word] += float(model.similarity(word, tag_)) * float(summary.get(tag))
             except KeyError:
                 pass
     for word in tax_.keys():
