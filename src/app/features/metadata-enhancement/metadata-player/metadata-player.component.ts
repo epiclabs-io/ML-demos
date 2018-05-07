@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {IScoreTS, ITags, MetadataServiceService} from '@app/features/metadata-enhancement/metadata-service.service';
+import {IScoreTS, MetadataServiceService} from '@app/features/metadata-enhancement/metadata-service.service';
 import { CloudData, CloudOptions } from 'angular-tag-cloud-module';
 
 @Component({
@@ -15,7 +15,7 @@ export class MetadataPlayerComponent implements OnInit {
   private interval: any;
   public warning = false;
   public options: CloudOptions;
-  public data: CloudData[];
+  public data: CloudData[] = [];
   constructor(private metadataService: MetadataServiceService) { }
   @ViewChild('player') player;
   @Input()
@@ -32,13 +32,13 @@ export class MetadataPlayerComponent implements OnInit {
     this.metadataService.scores$.subscribe((value: IScoreTS[]) => {
       this.scores = value;
     });
+    this.options = {width: 1000, height: 400, overflow: false};
   }
 
   private async loadVideo(url: string): Promise<void> {
     this._youtubeURL = url;
     this.player.nativeElement.load();
     await this.player.nativeElement.play();
-    this.options = {width: 1000, height: 400, overflow: false};
     this.interval = setInterval( () => {
       if (!this.player.nativeElement.ended) {
         const time = this.player.nativeElement.currentTime;
