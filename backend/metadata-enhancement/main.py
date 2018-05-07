@@ -155,11 +155,6 @@ def classify_image(image_path):
     return final_res
 
 
-@app.route('/')
-def main():
-    return render_template('main.html')
-
-
 @app.route('/api/v1/processVideo', methods=['POST'])
 def handle_url():
     global semaphore

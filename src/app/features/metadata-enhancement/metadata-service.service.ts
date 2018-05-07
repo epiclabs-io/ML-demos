@@ -21,7 +21,6 @@ export class MetadataServiceService {
     this.http.post(this.apiUrl + 'returnClassification', {}).subscribe((result: IClassificationResponse) => {
       this.scores = result.scores;
       this.scores$.next(this.scores);
-      console.log(this.scores);
       if (result.classification) {
         setTimeout(this.returnClassification.bind(this), 250);
       }
@@ -41,5 +40,5 @@ export interface IScoreTS {
 
 export interface ITags {
   text: string;
-  weight: string;
+  weight: number;
 }

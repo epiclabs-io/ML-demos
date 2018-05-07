@@ -43,7 +43,7 @@ export class PlayerComponent implements OnInit {
       if (!this.player.nativeElement.ended) {
         const time = this.player.nativeElement.currentTime;
         this.closestFrame = this.getClosestFrame(time);
-        if (this.closestFrame){
+        if (this.closestFrame) {
           console.log(time, this.closestFrame.time);
           this.score = 100 * parseFloat(this.closestFrame.score);
           this.warning = this.score > 75.0;

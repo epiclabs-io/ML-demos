@@ -1,5 +1,6 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {IScoreTS, MetadataServiceService} from '@app/features/metadata-enhancement/metadata-service.service';
+import {IScoreTS, ITags, MetadataServiceService} from '@app/features/metadata-enhancement/metadata-service.service';
+import { CloudData, CloudOptions } from 'angular-tag-cloud-module';
 
 @Component({
   selector: 'app-metadata-player',
@@ -12,8 +13,9 @@ export class MetadataPlayerComponent implements OnInit {
   private scores: IScoreTS[];
   private closestFrame: IScoreTS;
   private interval: any;
-  public score = 0.0;
   public warning = false;
+  public options: CloudOptions;
+  public data: CloudData[];
   constructor(private metadataService: MetadataServiceService) { }
   @ViewChild('player') player;
   @Input()
@@ -32,9 +34,28 @@ export class MetadataPlayerComponent implements OnInit {
     });
   }
 
-
   private async loadVideo(url: string): Promise<void> {
     this._youtubeURL = url;
     this.player.nativeElement.load();
-    await this.player.nativeElement.play();  }
+    await this.player.nativeElement.play();
+    this.options = {width: 1000, height: 400, overflow: false};
+    this.interval = setInterval( () => {
+      if (!this.player.nativeElement.ended) {
+        const time = this.player.nativeElement.currentTime;
+        this.closestFrame = this.getClosestFrame(time);
+        if (this.closestFrame) {
+          console.log(time, this.closestFrame.time);
+          this.data = this.closestFrame.tags;
+        }
+      } else {
+        clearInterval(this.interval);
+      }
+    }, 500);
+  }
+
+  private getClosestFrame(playerTime: number): IScoreTS {
+    return this.scores.find((score) => {
+      return Math.abs(parseFloat(score.time) - playerTime) < 0.25;
+    });
+  }
 }

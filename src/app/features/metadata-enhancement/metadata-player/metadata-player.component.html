@@ -1,3 +1,4 @@
 <video #player id="video" class="embed-responsive-item">
   <source id="video_src" *ngIf="youtubeURL" [src]="youtubeURL" type="video/mp4">
 </video>
+<angular-tag-cloud *ngIf="youtubeURL" [data]="data" [height]="options.height" [width]="options.width"></angular-tag-cloud>

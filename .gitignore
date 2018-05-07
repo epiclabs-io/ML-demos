@@ -50,6 +50,7 @@ epic-ml-ui.iml
 **/*.pb
 **/*.ckpt
 **/*.bin
+**/*.rdb
 backend/smoker-detector/saves/
 backend/smoker-detector/static/
 backend/smoker-detector/tmp/
