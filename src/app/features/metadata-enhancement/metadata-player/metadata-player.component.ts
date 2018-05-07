@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {IScoreTS, MetadataServiceService} from '@app/features/metadata-enhancement/metadata-service.service';
 import { CloudData, CloudOptions } from 'angular-tag-cloud-module';
 
@@ -18,6 +18,7 @@ export class MetadataPlayerComponent implements OnInit {
   public data: CloudData[] = [];
   constructor(private metadataService: MetadataServiceService) { }
   @ViewChild('player') player;
+  @Output() dataExport = new EventEmitter<CloudData[]>();
   @Input()
   set youtubeURL(youtubeURL: string) {
     setTimeout( this.loadVideo.bind(this, youtubeURL), 5000);
@@ -45,7 +46,9 @@ export class MetadataPlayerComponent implements OnInit {
         this.closestFrame = this.getClosestFrame(time);
         if (this.closestFrame) {
           console.log(time, this.closestFrame.time);
-          this.data = this.closestFrame.tags;
+          // this.data = this.closestFrame.tags;
+          console.log(this.scores);
+          this.dataExport.emit(this.closestFrame.tags);
         }
       } else {
         clearInterval(this.interval);

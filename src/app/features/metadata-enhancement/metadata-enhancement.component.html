@@ -7,20 +7,10 @@
           <mat-card-subtitle>Machine learning metadata enhancement detector demo</mat-card-subtitle>
           <mat-card-content>
             <div class="row">
-              <div class="col-5">
-                <app-metadata-url-box></app-metadata-url-box>
-                <div class="row">
-                  <div class="col-2"></div>
-                    <div class="col-4">
-                       <!--tag Cloud will be here-->
-                    </div>
-                    </div>
-                  <div class="col-6"></div>
-                </div>
-              </div>
-              <div class="col-7">
-                <app-metadata-player *ngIf="youtubeURL" [youtubeURL]="youtubeURL" class="embed-responsive embed-responsive-16by9"></app-metadata-player>
-              </div>
+              <app-metadata-url-box></app-metadata-url-box>
+              <app-metadata-player (dataExport)="exportCloud($event)" *ngIf="youtubeURL" [youtubeURL]="youtubeURL" class="embed-responsive embed-responsive-16by9"></app-metadata-player>
+              <angular-tag-cloud *ngIf="youtubeURL" [data]="cloudData" [height]=400 [width]=1000></angular-tag-cloud>
+            </div>
           </mat-card-content>
         </mat-card>
       </div>
