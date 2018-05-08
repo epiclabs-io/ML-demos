@@ -19,10 +19,10 @@ export class MetadataServiceService {
 
   public returnClassification (): void {
     this.http.post(this.apiUrl + 'returnClassification', {}).subscribe((result: IClassificationResponse) => {
-      this.scores = result.scores;
+      this.scores = this.scores.concat(result.scores);
       this.scores$.next(this.scores);
       if (result.classification) {
-        setTimeout(this.returnClassification.bind(this), 250);
+        setTimeout(this.returnClassification.bind(this), 750);
       }
     });
   }

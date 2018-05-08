@@ -21,7 +21,7 @@ export class MetadataPlayerComponent implements OnInit {
   @Output() dataExport = new EventEmitter<CloudData[]>();
   @Input()
   set youtubeURL(youtubeURL: string) {
-    setTimeout( this.loadVideo.bind(this, youtubeURL), 5000);
+    setTimeout( this.loadVideo.bind(this, youtubeURL), 35000);
     this.metadataService.returnClassification();
   }
   get youtubeURL(): string {
@@ -46,11 +46,11 @@ export class MetadataPlayerComponent implements OnInit {
         this.closestFrame = this.getClosestFrame(time);
         if (this.closestFrame) {
           console.log(time, this.closestFrame.time);
-          // this.data = this.closestFrame.tags;
-          console.log(this.scores);
           this.dataExport.emit(this.closestFrame.tags);
+          this.scores.splice(this.scores.indexOf(this.closestFrame), 1);
         }
       } else {
+        console.log('Video is finished');
         clearInterval(this.interval);
       }
     }, 500);

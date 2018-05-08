@@ -16,7 +16,7 @@ sys.path.append(base_dir + '/..')
 from flask import Flask
 from flask import request
 from flask import Response
-from flask import render_template, send_from_directory, send_file
+from flask import send_from_directory, send_file
 from datasets import imagenet
 from nets import inception_resnet_v2
 
@@ -213,6 +213,7 @@ def return_classification():
     scores = []
     for key in tag_buffer_db.keys():
         scores.append(json.loads(tag_buffer_db.get(key)))
+        tag_buffer_db.delete(key)
     response['scores'] = scores
     response['classification'] = semaphore
     return Response(json.dumps(response).replace("\'", "\""), mimetype="application/json")
