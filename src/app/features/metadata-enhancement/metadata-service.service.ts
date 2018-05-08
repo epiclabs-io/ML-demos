@@ -11,6 +11,7 @@ export class MetadataServiceService {
   constructor(private http: HttpClient) { }
 
   public postUrl (url: string): void {
+    this.scores = [];
     this.http.post(this.apiUrl + 'processVideo', {video: url}).subscribe((result: any) => {
       this.youtubeURL$.next('http://localhost:6006/static/videos/' + result + '?' + Date.now());
     });

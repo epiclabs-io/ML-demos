@@ -12,6 +12,7 @@ export class MetadataEnhancementComponent implements OnInit {
 
   public youtubeURL: string;
   public cloudData: CloudData[] = [];
+  public finished = false;
   constructor(private metadataService: MetadataServiceService) { }
   ngOnInit() {
     this.metadataService.youtubeURL$.subscribe((value: string) => {
@@ -21,5 +22,9 @@ export class MetadataEnhancementComponent implements OnInit {
 
   public exportCloud(data: CloudData[]) {
     this.cloudData = data;
+  }
+
+  public exportFinished(finished: boolean){
+      this.finished = finished;
   }
 }

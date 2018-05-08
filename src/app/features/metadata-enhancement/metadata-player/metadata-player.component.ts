@@ -19,11 +19,13 @@ export class MetadataPlayerComponent implements OnInit {
   constructor(private metadataService: MetadataServiceService) { }
   @ViewChild('player') player;
   @Output() dataExport = new EventEmitter<CloudData[]>();
+  @Output() finishedExport = new EventEmitter<boolean>();
   @Input()
   set youtubeURL(youtubeURL: string) {
-    setTimeout( this.loadVideo.bind(this, youtubeURL), 35000);
+    setTimeout( this.loadVideo.bind(this, youtubeURL), 5000);
     this.metadataService.returnClassification();
   }
+
   get youtubeURL(): string {
     return this._youtubeURL;
   }
@@ -38,6 +40,7 @@ export class MetadataPlayerComponent implements OnInit {
 
   private async loadVideo(url: string): Promise<void> {
     this._youtubeURL = url;
+    this.finishedExport.emit(false);
     this.player.nativeElement.load();
     await this.player.nativeElement.play();
     this.interval = setInterval( () => {
@@ -51,6 +54,7 @@ export class MetadataPlayerComponent implements OnInit {
         }
       } else {
         console.log('Video is finished');
+        this.finishedExport.emit(true);
         clearInterval(this.interval);
       }
     }, 500);
