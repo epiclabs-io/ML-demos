@@ -11,7 +11,7 @@ import { CloudData } from 'angular-tag-cloud-module';
 export class MetadataEnhancementComponent implements OnInit {
 
   public youtubeURL: string;
-  public cloudData: CloudData[] = []
+  public cloudData: CloudData[] = [];
   constructor(private metadataService: MetadataServiceService) { }
   ngOnInit() {
     this.metadataService.youtubeURL$.subscribe((value: string) => {
