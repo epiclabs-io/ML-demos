@@ -5,6 +5,7 @@ import { SharedModule } from '@app/shared';
 import { ComponentsComponent } from './components.component';
 import { TableComponent } from './table/table.component';
 import { TableService } from '@app/features/components/table/table.service';
+import { TagCloudComponent } from './tag-cloud/tag-cloud.component';
 
 @NgModule({
   imports: [

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {IScoreTS, MetadataServiceService} from '@app/features/metadata-enhancement/metadata-service.service';
-import { CloudData, CloudOptions } from 'angular-tag-cloud-module';
+import { CloudData, CloudOptions } from '@app/features/components/tag-cloud/tag-cloud.interfaces';
 
 @Component({
   selector: 'app-metadata-player',

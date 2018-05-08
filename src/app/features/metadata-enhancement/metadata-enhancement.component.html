@@ -9,7 +9,7 @@
             <div class="row">
               <app-metadata-url-box></app-metadata-url-box>
               <app-metadata-player (dataExport)="exportCloud($event)" *ngIf="youtubeURL" [youtubeURL]="youtubeURL" class="embed-responsive embed-responsive-16by9"></app-metadata-player>
-              <angular-tag-cloud *ngIf="youtubeURL" [data]="cloudData" [height]=400 [width]=1000></angular-tag-cloud>
+              <app-angular-tag-cloud *ngIf="youtubeURL" [data]="cloudData" [height]=400 [width]=1000></app-angular-tag-cloud>
             </div>
           </mat-card-content>
         </mat-card>

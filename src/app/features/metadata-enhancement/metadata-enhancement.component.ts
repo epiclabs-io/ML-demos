@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MetadataServiceService } from '@app/features/metadata-enhancement/metadata-service.service';
-import { CloudData } from 'angular-tag-cloud-module';
+import { CloudData } from '@app/features/components/tag-cloud/tag-cloud.interfaces';
 
 
 @Component({

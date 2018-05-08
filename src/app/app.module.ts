@@ -16,7 +16,7 @@ import { MetadataServiceService } from '@app/features/metadata-enhancement/metad
 import { UrlBoxComponent } from '@app/features/smoker-detector/url-box/url-box.component';
 import { MetadataPlayerComponent } from './features/metadata-enhancement/metadata-player/metadata-player.component';
 import { MetadataUrlBoxComponent } from './features/metadata-enhancement/metadata-url-box/metadata-url-box.component';
-import { TagCloudModule } from 'angular-tag-cloud-module';
+import {TagCloudComponent} from '@app/features/components/tag-cloud/tag-cloud.component';
 
 @NgModule({
   imports: [
@@ -34,12 +34,9 @@ import { TagCloudModule } from 'angular-tag-cloud-module';
 
     // app
     AppRoutingModule,
-
-    // Cloud Tag
-    TagCloudModule,
   ],
   providers: [SmokerServiceService, MetadataServiceService],
   bootstrap: [AppComponent],
-  declarations: [AppComponent, SmokerDetectorComponent, UrlBoxComponent, PlayerComponent, MetadataEnhancementComponent, MetadataPlayerComponent, MetadataUrlBoxComponent],
+  declarations: [AppComponent, SmokerDetectorComponent, UrlBoxComponent, PlayerComponent, MetadataEnhancementComponent, MetadataPlayerComponent, MetadataUrlBoxComponent, TagCloudComponent],
 })
 export class AppModule { }
