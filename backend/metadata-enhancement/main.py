@@ -9,6 +9,7 @@ import json
 import youtube_dl
 import argparse
 import redis
+import gensim
 from threading import Thread
 real_path = os.path.realpath(__file__)
 base_dir = real_path[:real_path.rfind("/")]
@@ -75,7 +76,7 @@ with slim.arg_scope(arg_scope):
 
 print("------ The Graph is ready ------")
 
-# model = gensim.models.KeyedVectors.load_word2vec_format(word_to_vec_file, binary=True)
+model = gensim.models.KeyedVectors.load_word2vec_format(word_to_vec_file, binary=True)
 
 print("------ The Model is ready ------")
 
@@ -86,12 +87,12 @@ penalty = 0.01
 num_tags = 20
 
 app.config["tax_names"] = ["Custom", "Amazon", "Ebay", "Sports", "Animals"]
-tax_1 = ["plant", "geology", "natural", "transport", "person", "animal"]
-tax_2 = ["books", "movies", "electronics", "home", "food", "sports", "clothing", "automotive"]
-tax_3 = ["motors", "fashion", "electronics", "art", "home", "industrial", "sports", "music"]
-tax_4 = ["golf", "baseball", "football", "rugby", "volleyball", "tennis", "basketball", "ski"]
-tax_5 = ["mammal", "reptile", "avian", "fish", "insect"]
-tax = {"tax-1": tax_1, "tax-2": tax_2, "tax-3": tax_3, "tax-4": tax_4, "tax-5": tax_5}
+custom = ["plant", "geology", "natural", "transport", "person", "animal"]
+amazon = ["books", "movies", "electronics", "home", "food", "sports", "clothing", "automotive"]
+ebay = ["motors", "fashion", "electronics", "art", "home", "industrial", "sports", "music"]
+sports = ["golf", "baseball", "football", "rugby", "volleyball", "tennis", "basketball", "ski"]
+animals = ["mammal", "reptile", "avian", "fish", "insect"]
+tax = {"Custom": custom, "Amazon": amazon, "Ebay": ebay, "Sports": sports, "Animals": animals}
 length = 0
 for key in tax.keys():
     if len(tax[key]) > length:
@@ -219,9 +220,16 @@ def return_classification():
     return Response(json.dumps(response).replace("\'", "\""), mimetype="application/json")
 
 
-@app.route('/api/v1/returnRelevantTags', methods=['POST'])
-def return_relevant_tags():
-    return Response(summary.get("total_tags"), mimetype="application/json")
+@app.route('/api/v1/returnSummary', methods=['GET'])
+def return_summary():
+    total_tags_to_order = {}
+    for tag in summary.keys():
+        total_tags_to_order[tag] = "{0:.6f}".format(float(summary.get(tag)))
+    response = {'summary': sorted(total_tags_to_order.items(), key=operator.itemgetter(1), reverse=True)[:10],
+                'taxonomy': {}}
+    for tax_ in tax:
+        response['taxonomy'][tax_] = find_most_similar(tax_)
+    return Response(json.dumps(response), mimetype="application/json")
 
 
 @app.route('/api/v1/editlist.edl', methods=['GET'])
@@ -240,16 +248,6 @@ def return_edl():
         last_tc = tc_and_tags[0]
     file.close()
     return send_file(file_name)
-
-
-@app.route("/api/v1/taxonomy", methods=["POST"])
-def taxonomy():
-    tax_id = request.json["id"]
-    if tax_id == "tax-0":
-        tax_id = "tax-1"
-    result = find_most_similar(tax_id)
-    return Response(json.dumps(sorted(result.items(), key=operator.itemgetter(1), reverse=True)),
-                    mimetype="application/json")
 
 
 def find_most_similar(tax_id):
