@@ -14,6 +14,7 @@ export class MetadataEnhancementComponent implements OnInit {
   public cloudData: CloudData[] = [];
   public finished = false;
   public edlUrl = this.metadataService.edlUrl;
+
   ngOnInit() {
     this.metadataService.youtubeURL$.subscribe((value: string) => {
       this.youtubeURL = value;

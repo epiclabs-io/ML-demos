@@ -229,8 +229,8 @@ def return_summary():
     total_tags_to_order = {}
     for tag in summary.keys():
         total_tags_to_order[tag] = "{0:.6f}".format(float(summary.get(tag)))
-    response = {'summary': sorted(total_tags_to_order.items(), key=operator.itemgetter(1), reverse=True)[:10],
-                'taxonomy': {}}
+    response = {'summary': normalize_tags(sorted(total_tags_to_order.items(),
+                                                 key=operator.itemgetter(1), reverse=True)[:10]), 'taxonomy': {}}
     for tax_ in tax:
         response['taxonomy'][tax_] = find_most_similar(tax_)
     return Response(json.dumps(response), mimetype="application/json")
@@ -253,6 +253,18 @@ def return_edl():
     file.close()
     edl_tags.flushdb()
     return send_file(file_name)
+
+
+def normalize_tags(ordered_tags):
+    tags = []
+    scores = []
+    for i in range(len(ordered_tags)):
+        tags.append(ordered_tags[i][0].split(',')[0])
+        scores.append(float(ordered_tags[i][1]))
+    maximum = max(scores)
+    scores = [x / maximum for x in scores]
+    normalized_tags = [[tags[i], "{0:.6f}".format(100 * scores[i])] for i in range(len(scores))]
+    return normalized_tags
 
 
 def find_most_similar(tax_id):
