@@ -55,9 +55,11 @@ semaphore = False
 tag_buffer_db = redis.StrictRedis(host='localhost', port=6379, db=0, charset="utf-8", decode_responses=True)
 summary = redis.StrictRedis(host='localhost', port=6379, db=1, charset="utf-8", decode_responses=True)
 total_tags = redis.StrictRedis(host='localhost', port=6379, db=2, charset="utf-8", decode_responses=True)
+edl_tags = redis.StrictRedis(host='localhost', port=6379, db=3, charset="utf-8", decode_responses=True)
 tag_buffer_db.flushdb()
 summary.flushdb()
 total_tags.flushdb()
+edl_tags.flushdb()
 
 checkpoint_file = 'vol/inception_resnet_v2_2016_08_30.ckpt'
 word_to_vec_file = "vol/wordtovec.bin"
@@ -163,6 +165,7 @@ def handle_url():
     tag_buffer_db.flushdb()
     summary.flushdb()
     total_tags.flushdb()
+    edl_tags.flushdb()
     clear_tmp_images()
     video_url = request.json['video']
     video_name = video_url[video_url.rfind('?v=') + 3:]
@@ -212,7 +215,9 @@ def return_classification():
     response = {}
     scores = []
     for key in tag_buffer_db.keys():
-        scores.append(json.loads(tag_buffer_db.get(key)))
+        tag = tag_buffer_db.get(key)
+        scores.append(json.loads(tag))
+        edl_tags.set(key, tag)
         tag_buffer_db.delete(key)
     response['scores'] = scores
     response['classification'] = semaphore
@@ -236,16 +241,17 @@ def return_edl():
     print("-------- Preparing EDL --------")
     file_name = "tmp.edl"
     file = open(file_name, "w+")
-    sorted_keys = sorted(tag_buffer_db.keys(), key=number_key)[1:]
+    sorted_keys = sorted(edl_tags.keys(), key=number_key)[1:]
     last_tc = "0.0000"
-    for i, index in enumerate(sorted_keys):
-        tc_and_tags = json.loads(tag_buffer_db.get(index))
-        file.write("%s    %s    %s,    %s,    %s\n" % (last_tc, tc_and_tags[0],
-                                                       tc_and_tags[1][0]['text'].split(",")[0],
-                                                       tc_and_tags[1][1]['text'].split(",")[0],
-                                                       tc_and_tags[1][2]['text'].split(",")[0]))
-        last_tc = tc_and_tags[0]
+    for _, index in enumerate(sorted_keys):
+        tc_and_tags = json.loads(edl_tags.get(index))
+        file.write("%s    %s    %s,    %s,    %s\n" % (last_tc, tc_and_tags['time'],
+                                                       tc_and_tags['tags'][0]['text'].split(",")[0],
+                                                       tc_and_tags['tags'][1]['text'].split(",")[0],
+                                                       tc_and_tags['tags'][2]['text'].split(",")[0]))
+        last_tc = tc_and_tags['time']
     file.close()
+    edl_tags.flushdb()
     return send_file(file_name)
 
 

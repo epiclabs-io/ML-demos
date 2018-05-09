@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class MetadataServiceService {
   private apiUrl = 'http://localhost:6006/api/v1/';
+  public edlUrl = this.apiUrl + 'editlist.edl';
   private scores: IScoreTS[] = [];
   public youtubeURL$ = new BehaviorSubject<string>('');
   public scores$ = new BehaviorSubject<IScoreTS[]>([]);

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MetadataServiceService } from '@app/features/metadata-enhancement/metadata-service.service';
 import { CloudData } from '@app/features/components/tag-cloud/tag-cloud.interfaces';
 
-
 @Component({
   selector: 'app-metadata-enhancement',
   templateUrl: './metadata-enhancement.component.html',
@@ -10,10 +9,11 @@ import { CloudData } from '@app/features/components/tag-cloud/tag-cloud.interfac
 })
 export class MetadataEnhancementComponent implements OnInit {
 
+  constructor(private metadataService: MetadataServiceService) { }
   public youtubeURL: string;
   public cloudData: CloudData[] = [];
   public finished = false;
-  constructor(private metadataService: MetadataServiceService) { }
+  public edlUrl = this.metadataService.edlUrl;
   ngOnInit() {
     this.metadataService.youtubeURL$.subscribe((value: string) => {
       this.youtubeURL = value;
