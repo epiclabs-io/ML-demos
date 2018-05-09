@@ -24,7 +24,7 @@ export class MetadataEnhancementComponent implements OnInit {
     this.cloudData = data;
   }
 
-  public exportFinished(finished: boolean){
+  public exportFinished(finished: boolean) {
       this.finished = finished;
   }
 }

@@ -205,7 +205,6 @@ def start_classification():
     global semaphore
     semaphore = False
     print("All images classified")
-    # return Response(json.dumps(sorted(total_tags_to_order.items(), key=operator.itemgetter(1), reverse=True)))
 
 
 @app.route("/api/v1/returnClassification", methods=['POST'])

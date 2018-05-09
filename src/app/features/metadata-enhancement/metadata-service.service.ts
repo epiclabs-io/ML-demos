@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class MetadataServiceService {
@@ -27,6 +28,10 @@ export class MetadataServiceService {
       }
     });
   }
+
+  public getSummary (): Observable<Object> {
+    return this.http.get(this.apiUrl + 'returnSummary');
+  }
 }
 
 interface IClassificationResponse {
@@ -42,4 +47,9 @@ export interface IScoreTS {
 export interface ITags {
   text: string;
   weight: number;
+}
+
+export interface ISummary {
+  taxonomy: {};
+  summary: {};
 }
