@@ -22,7 +22,6 @@ export class ScoreBarComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.score, this.tag);
   }
 
 }

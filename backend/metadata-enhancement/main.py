@@ -232,7 +232,7 @@ def return_summary():
     response = {'summary': normalize_tags(sorted(total_tags_to_order.items(),
                                                  key=operator.itemgetter(1), reverse=True)[:10]), 'taxonomy': {}}
     for tax_ in tax:
-        response['taxonomy'][tax_] = find_most_similar(tax_)
+        response['taxonomy'][tax_] = normalize_tags(find_most_similar(tax_))
     return Response(json.dumps(response), mimetype="application/json")
 
 
@@ -255,18 +255,6 @@ def return_edl():
     return send_file(file_name)
 
 
-def normalize_tags(ordered_tags):
-    tags = []
-    scores = []
-    for i in range(len(ordered_tags)):
-        tags.append(ordered_tags[i][0].split(',')[0])
-        scores.append(float(ordered_tags[i][1]))
-    maximum = max(scores)
-    scores = [x / maximum for x in scores]
-    normalized_tags = [[tags[i], "{0:.6f}".format(100 * scores[i])] for i in range(len(scores))]
-    return normalized_tags
-
-
 def find_most_similar(tax_id):
     tax_ = {}
     for word in tax[tax_id]:
@@ -280,7 +268,19 @@ def find_most_similar(tax_id):
                 pass
     for word in tax_.keys():
         tax_[word] = "{0:.6f}".format(tax_[word])
-    return tax_
+    return [(tag, tax_[tag]) for tag in tax_.keys()]
+
+
+def normalize_tags(ordered_tags):
+    tags = []
+    scores = []
+    for i in range(len(ordered_tags)):
+        tags.append(ordered_tags[i][0].split(',')[0])
+        scores.append(float(ordered_tags[i][1]))
+    maximum = max(scores)
+    scores = [x / maximum for x in scores]
+    normalized_tags = [[tags[i], "{0:.6f}".format(100 * scores[i])] for i in range(len(scores))]
+    return normalized_tags
 
 
 @app.after_request
