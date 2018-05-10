@@ -18,6 +18,7 @@ export class MetadataPlayerComponent implements OnInit {
   constructor(private metadataService: MetadataServiceService) { }
   @ViewChild('player') player;
   @Output() dataExport = new EventEmitter<CloudData[]>();
+  @Output() startedExport = new EventEmitter<boolean>();
   @Output() finishedExport = new EventEmitter<boolean>();
   @Input()
   set youtubeURL(youtubeURL: string) {
@@ -42,6 +43,7 @@ export class MetadataPlayerComponent implements OnInit {
     this.finishedExport.emit(false);
     this.player.nativeElement.load();
     await this.player.nativeElement.play();
+    this.startedExport.emit(true);
     this.interval = setInterval( () => {
       if (!this.player.nativeElement.ended) {
         const time = this.player.nativeElement.currentTime;

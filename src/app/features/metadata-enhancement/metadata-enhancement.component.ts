@@ -12,6 +12,7 @@ export class MetadataEnhancementComponent implements OnInit {
   constructor(private metadataService: MetadataServiceService) { }
   public youtubeURL: string;
   public cloudData: CloudData[] = [];
+  public started = false;
   public finished = false;
   public edlUrl = this.metadataService.edlUrl;
 
@@ -25,7 +26,15 @@ export class MetadataEnhancementComponent implements OnInit {
     this.cloudData = data;
   }
 
+  public exportStarted(started: boolean) {
+    this.started = started;
+  }
+
   public exportFinished(finished: boolean) {
-      this.finished = finished;
+    this.finished = finished;
+    if (finished) {
+      this.youtubeURL = '';
+      this.started = false;
+    }
   }
 }

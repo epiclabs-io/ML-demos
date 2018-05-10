@@ -6,15 +6,16 @@
           <mat-card-title>Epic Labs Machine Learning</mat-card-title>
           <mat-card-subtitle>Machine learning metadata enhancement demo</mat-card-subtitle>
           <mat-card-content>
-              <app-metadata-url-box></app-metadata-url-box>
-              <app-metadata-player (dataExport)="exportCloud($event)" (finishedExport)="exportFinished($event)" *ngIf="youtubeURL" [youtubeURL]="youtubeURL" class="embed-responsive embed-responsive-16by9"></app-metadata-player>
-              <app-angular-tag-cloud *ngIf="youtubeURL && !finished" [data]="cloudData" [height]=400 [width]=1000></app-angular-tag-cloud>
+            <app-metadata-url-box></app-metadata-url-box>
+            <mat-spinner *ngIf="youtubeURL && !started"></mat-spinner>
+            <app-metadata-player (dataExport)="exportCloud($event)" (finishedExport)="exportFinished($event)" (startedExport)="exportStarted($event)" *ngIf="youtubeURL" [youtubeURL]="youtubeURL" class="embed-responsive embed-responsive-16by9"></app-metadata-player>
+            <app-angular-tag-cloud *ngIf="youtubeURL && !finished" [data]="cloudData" [height]=400 [width]=1000></app-angular-tag-cloud>
           </mat-card-content>
         </mat-card>
         <mat-card *ngIf="finished" class="box-shadow mb-4 about-me">
           <mat-card-title>Summary of the video:</mat-card-title>
           <mat-card-content>
-                <app-summary></app-summary>
+            <app-summary></app-summary>
           </mat-card-content>
           <mat-card-footer>
             <div class="edl-btn">
