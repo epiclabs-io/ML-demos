@@ -1,2 +1,12 @@
-{{ tag }}
-<mat-progress-bar mode="determinate" [value]="score" class="mt-5" color="accent"></mat-progress-bar>
+<div class="row">
+  <div class="col-3">
+    <div class="text-center">
+      <span>{{ tag }}</span>
+    </div>
+  </div>
+  <div class="col">
+    <section class="bar-section">
+      <mat-progress-bar class="bar-margin" mode="determinate" [value]="score" color="accent"></mat-progress-bar>
+    </section>
+  </div>
+</div>

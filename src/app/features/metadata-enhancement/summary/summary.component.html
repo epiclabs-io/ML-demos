@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-6">
+  <div class="col-6 summary-col">
     <app-score-bar *ngFor="let score of summary" [setTag]="score[0]" [setScore]="score[1]"></app-score-bar>
   </div>
   <div *ngIf="taxonomy" class="col-6">
