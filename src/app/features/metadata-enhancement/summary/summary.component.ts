@@ -10,6 +10,7 @@ import { ISummary, MetadataServiceService } from '@app/features/metadata-enhance
 export class SummaryComponent implements OnInit {
   public summary: {};
   public taxonomy: {};
+  public objectKeys = Object.keys;
   constructor(private metadataService: MetadataServiceService) { }
 
   ngOnInit() {
