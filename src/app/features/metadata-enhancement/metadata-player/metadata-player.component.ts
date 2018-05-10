@@ -22,7 +22,7 @@ export class MetadataPlayerComponent implements OnInit {
   @Output() finishedExport = new EventEmitter<boolean>();
   @Input()
   set youtubeURL(youtubeURL: string) {
-    setTimeout( this.loadVideo.bind(this, youtubeURL), 5000);
+    setTimeout( this.loadVideo.bind(this, youtubeURL), 35000);
     this.metadataService.returnClassification();
   }
 

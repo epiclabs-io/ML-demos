@@ -1317,7 +1317,7 @@ input.mat-input-element {
 }
 
 .mat-progress-bar.mat-accent .mat-progress-bar-background {
-    fill: #ff80ab
+    fill: #000000
 }
 
 .mat-progress-bar.mat-accent .mat-progress-bar-buffer {
@@ -1689,7 +1689,7 @@ input.mat-input-element {
 }
 
 .mat-tab-group.mat-accent .mat-tab-label:not(.mat-tab-disabled):focus, .mat-tab-group.mat-accent .mat-tab-link:not(.mat-tab-disabled):focus, .mat-tab-nav-bar.mat-accent .mat-tab-label:not(.mat-tab-disabled):focus, .mat-tab-nav-bar.mat-accent .mat-tab-link:not(.mat-tab-disabled):focus {
-    background-color: rgba(255, 128, 171, .3)
+    background-color: #f0ffcc
 }
 
 .mat-tab-group.mat-accent .mat-ink-bar, .mat-tab-nav-bar.mat-accent .mat-ink-bar {

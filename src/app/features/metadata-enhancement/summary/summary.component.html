@@ -3,7 +3,7 @@
     <app-score-bar *ngFor="let score of summary" [setTag]="score[0]" [setScore]="score[1]"></app-score-bar>
   </div>
   <div *ngIf="taxonomy" class="col-6">
-    <mat-tab-group [dynamicHeight]="true">
+    <mat-tab-group color="accent" [dynamicHeight]="true">
       <mat-tab *ngFor="let tax of objectKeys(taxonomy)" label="{{ tax }}">
         <app-score-bar *ngFor="let taxTerm of taxonomy[tax]" [setTag]="taxTerm[0]" [setScore]="taxTerm[1]"></app-score-bar>
       </mat-tab>
