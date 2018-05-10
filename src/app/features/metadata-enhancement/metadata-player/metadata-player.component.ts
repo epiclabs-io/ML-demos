@@ -13,7 +13,6 @@ export class MetadataPlayerComponent implements OnInit {
   private scores: IScoreTS[];
   private closestFrame: IScoreTS;
   private interval: any;
-  public warning = false;
   public options: CloudOptions;
   public data: CloudData[] = [];
   constructor(private metadataService: MetadataServiceService) { }
@@ -22,7 +21,7 @@ export class MetadataPlayerComponent implements OnInit {
   @Output() finishedExport = new EventEmitter<boolean>();
   @Input()
   set youtubeURL(youtubeURL: string) {
-    setTimeout( this.loadVideo.bind(this, youtubeURL), 35000);
+    setTimeout( this.loadVideo.bind(this, youtubeURL), 45000);
     this.metadataService.returnClassification();
   }
 
