@@ -12,6 +12,7 @@ export class MetadataPlayerComponent implements OnInit {
   private _youtubeURL: string;
   private scores: IScoreTS[];
   private closestFrame: IScoreTS;
+  private finished = false;
   private interval: any;
   public options: CloudOptions;
   public data: CloudData[] = [];
@@ -55,8 +56,11 @@ export class MetadataPlayerComponent implements OnInit {
         }
       } else {
         console.log('Video is finished');
-        this.finishedExport.emit(true);
-        clearInterval(this.interval);
+        if (!this.finished) {
+          this.finished = true;
+          this.finishedExport.emit(this.finished);
+          clearInterval(this.interval);
+        }
       }
     }, 500);
   }

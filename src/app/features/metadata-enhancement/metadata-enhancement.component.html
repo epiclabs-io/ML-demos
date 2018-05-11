@@ -7,9 +7,7 @@
           <mat-card-subtitle>Machine learning metadata enhancement demo</mat-card-subtitle>
           <mat-card-content>
             <app-metadata-url-box></app-metadata-url-box>
-            <mat-spinner *ngIf="youtubeURL && !started"></mat-spinner>
-            <app-metadata-player (dataExport)="exportCloud($event)" (finishedExport)="exportFinished($event)" (startedExport)="exportStarted($event)" *ngIf="youtubeURL" [youtubeURL]="youtubeURL" class="embed-responsive embed-responsive-16by9"></app-metadata-player>
-            <app-angular-tag-cloud *ngIf="youtubeURL && !finished" [data]="cloudData" [height]=400 [width]=1000></app-angular-tag-cloud>
+            <mat-spinner *ngIf="!youtubeURL == started"></mat-spinner>
           </mat-card-content>
         </mat-card>
         <mat-card *ngIf="finished" class="box-shadow mb-4 about-me">
@@ -22,6 +20,12 @@
               <a [href]="edlUrl" mat-raised-button color="accent" download>Get EDL</a>
             </div>
           </mat-card-footer>
+        </mat-card>
+        <mat-card class="box-shadow mb-4 about-me" *ngIf="youtubeURL">
+          <mat-card-content>
+            <app-metadata-player (dataExport)="exportCloud($event)" (finishedExport)="exportFinished($event)" (startedExport)="exportStarted($event)" [youtubeURL]="youtubeURL" class="embed-responsive embed-responsive-16by9"></app-metadata-player>
+            <app-angular-tag-cloud [data]="cloudData" [height]=400 [width]=1000></app-angular-tag-cloud>
+          </mat-card-content>
         </mat-card>
       </div>
     </div>

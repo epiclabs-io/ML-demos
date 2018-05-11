@@ -26,15 +26,11 @@ export class MetadataEnhancementComponent implements OnInit {
     this.cloudData = data;
   }
 
-  public exportStarted(started: boolean) {
-    this.started = started;
-  }
-
   public exportFinished(finished: boolean) {
     this.finished = finished;
-    if (finished) {
-      this.youtubeURL = '';
-      this.started = false;
-    }
+  }
+
+  public exportStarted(started: boolean) {
+    this.started = started;
   }
 }
