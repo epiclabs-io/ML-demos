@@ -41,7 +41,8 @@ export class ContextualPlayerComponent implements OnInit {
 
   private async loadVideo(url: string): Promise<void> {
     this._youtubeURL = url;
-    this.finishedExport.emit(false);
+    this.finished = false;
+    this.finishedExport.emit(this.finished);
     this.player.nativeElement.load();
     await this.player.nativeElement.play();
     this.startedExport.emit(true);
