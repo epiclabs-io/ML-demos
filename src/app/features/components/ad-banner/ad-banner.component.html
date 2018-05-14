@@ -1,3 +1,6 @@
-<span>{{ price }}</span>
-<!--<img src="{{ image }}">-->
-<span>{{ url }}</span>
+<div class="img">
+  <a [href]="url" target="_blank">
+    <img [src]="image">
+  </a>
+</div>
+<a class="price" *ngIf="price != 0" [href]="url" mat-raised-button color="accent" target="_blank">{{ price }}</a>

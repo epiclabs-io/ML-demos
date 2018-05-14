@@ -20,7 +20,7 @@
           <mat-card-content>
             <app-contextual-player (bannerExport)="exportBanner($event)" (dataExport)="exportCloud($event)" (finishedExport)="exportFinished($event)" (startedExport)="exportStarted($event)" [youtubeURL]="youtubeURL" class="embed-responsive embed-responsive-16by9"></app-contextual-player>
             <div class="row">
-              <div class="col-3" *ngFor="let ad of banner">
+              <div class="col-4" *ngFor="let ad of banner">
                 <app-ad-banner *ngIf="ad.image" [setImage]="ad.image" [setPrice]="ad.price" [setUrl]="ad.url"></app-ad-banner>
               </div>
             </div>
