@@ -3,7 +3,6 @@ import { SharedModule } from '@app/shared';
 import { ComponentsComponent } from './components.component';
 import { TableComponent } from './table/table.component';
 import { TableService } from '@app/features/components/table/table.service';
-import { AdBannerComponent } from './ad-banner/ad-banner.component';
 
 @NgModule({
   imports: [
@@ -13,7 +12,6 @@ import { AdBannerComponent } from './ad-banner/ad-banner.component';
   declarations: [
     ComponentsComponent,
     TableComponent,
-    AdBannerComponent,
   ],
 
   providers: [

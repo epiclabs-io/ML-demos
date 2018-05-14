@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ContextualServiceService } from '@app/features/contextual-advertising/contextual-service.service';
+import {ContextualServiceService, IBanner} from '@app/features/contextual-advertising/contextual-service.service';
 import { CloudData } from '@app/features/components/tag-cloud/tag-cloud.interfaces';
 
 @Component({
@@ -12,6 +12,7 @@ export class ContextualAdvertisingComponent implements OnInit {
   constructor(private contextual: ContextualServiceService) { }
   public youtubeURL: string;
   public cloudData: CloudData[] = [];
+  public banner: IBanner[];
   public started = false;
   public finished = false;
 
@@ -23,6 +24,10 @@ export class ContextualAdvertisingComponent implements OnInit {
 
   public exportCloud(data: CloudData[]) {
     this.cloudData = data;
+  }
+
+  public exportBanner(banner: IBanner[]) {
+    this.banner = banner;
   }
 
   public exportFinished(finished: boolean) {

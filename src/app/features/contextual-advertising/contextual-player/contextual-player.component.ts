@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { IScoreTS, ContextualServiceService } from '@app/features/contextual-advertising/contextual-service.service';
+import { IScoreTS, ContextualServiceService, IBanner } from '@app/features/contextual-advertising/contextual-service.service';
 import { CloudData, CloudOptions } from '@app/features/components/tag-cloud/tag-cloud.interfaces';
 
 @Component({
@@ -21,6 +21,7 @@ export class ContextualPlayerComponent implements OnInit {
   @Output() dataExport = new EventEmitter<CloudData[]>();
   @Output() startedExport = new EventEmitter<boolean>();
   @Output() finishedExport = new EventEmitter<boolean>();
+  @Output() bannerExport = new EventEmitter<IBanner[]>()
   @Input()
   set youtubeURL(youtubeURL: string) {
     setTimeout( this.loadVideo.bind(this, youtubeURL), 5000);
@@ -51,6 +52,7 @@ export class ContextualPlayerComponent implements OnInit {
         if (this.closestFrame) {
           console.log(time, this.closestFrame.time);
           this.dataExport.emit(this.closestFrame.tags);
+          this.bannerExport.emit(this.closestFrame.banner);
           this.scores.splice(this.scores.indexOf(this.closestFrame), 1);
         }
       } else {
