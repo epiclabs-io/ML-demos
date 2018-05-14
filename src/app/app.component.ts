@@ -20,6 +20,9 @@ export class AppComponent {
     }, {
       route: '/metadataEnhancement',
       title: 'Metadata Enhancement'
+    }, {
+      route: '/contextualAdvertising',
+      title: 'Contextual Advertising'
     }
   ];
 }

@@ -16,9 +16,13 @@ import { MetadataServiceService } from '@app/features/metadata-enhancement/metad
 import { UrlBoxComponent } from '@app/features/smoker-detector/url-box/url-box.component';
 import { MetadataPlayerComponent } from './features/metadata-enhancement/metadata-player/metadata-player.component';
 import { MetadataUrlBoxComponent } from './features/metadata-enhancement/metadata-url-box/metadata-url-box.component';
-import {TagCloudComponent} from '@app/features/components/tag-cloud/tag-cloud.component';
+import { TagCloudComponent } from '@app/features/components/tag-cloud/tag-cloud.component';
 import { SummaryComponent } from './features/metadata-enhancement/summary/summary.component';
-import {ScoreBarComponent} from '@app/features/components/score-bar/score-bar.component';
+import { ScoreBarComponent } from '@app/features/components/score-bar/score-bar.component';
+import { ContextualAdvertisingComponent } from './features/contextual-advertising/contextual-advertising.component';
+import { ContextualUrlBoxComponent } from './features/contextual-advertising/contextual-url-box/contextual-url-box.component';
+import { ContextualServiceService } from '@app/features/contextual-advertising/contextual-service.service';
+
 
 @NgModule({
   imports: [
@@ -37,9 +41,11 @@ import {ScoreBarComponent} from '@app/features/components/score-bar/score-bar.co
     // app
     AppRoutingModule,
   ],
-  providers: [SmokerServiceService, MetadataServiceService],
+  providers: [SmokerServiceService, MetadataServiceService, ContextualServiceService],
   bootstrap: [AppComponent],
   declarations: [AppComponent, SmokerDetectorComponent, UrlBoxComponent, PlayerComponent, MetadataEnhancementComponent,
-    MetadataPlayerComponent, MetadataUrlBoxComponent, TagCloudComponent, SummaryComponent, ScoreBarComponent],
+    MetadataPlayerComponent, MetadataUrlBoxComponent, TagCloudComponent, SummaryComponent, ScoreBarComponent,
+    ContextualAdvertisingComponent,
+    ContextualUrlBoxComponent],
 })
 export class AppModule { }

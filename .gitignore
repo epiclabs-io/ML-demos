@@ -58,3 +58,4 @@ backend/smoker-detector/tmp-output/
 backend/smoker-detector/retrained_labels.txt
 backend/metadata-enhancement/tmp/
 backend/metadata-enhancement/tmp-output/
+backend/contextual-advertising/config.json
