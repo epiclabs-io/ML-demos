@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class ContextualServiceService {
@@ -41,6 +41,7 @@ interface IClassificationResponse {
 
 export interface IScoreTS {
   time: string;
+  banner: IBanner[];
   tags: ITags[];
 }
 
@@ -49,7 +50,8 @@ export interface ITags {
   weight: number;
 }
 
-export interface ISummary {
-  taxonomy: {};
-  summary: {};
+export interface IBanner {
+  url: string;
+  price: string;
+  image: string;
 }

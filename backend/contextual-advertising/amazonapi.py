@@ -71,7 +71,7 @@ def get_url_image_price(response, directSearch=False):
         price = response["ItemAttributes"]["ListPrice"]["FormattedPrice"]
     except KeyError:
         price = 0
-    return url, image, price
+    return {'url': url, 'image': image, 'price': price}
 
 
 def get_direct_item(tag):

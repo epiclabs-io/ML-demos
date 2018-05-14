@@ -22,6 +22,7 @@ import { ScoreBarComponent } from '@app/features/components/score-bar/score-bar.
 import { ContextualAdvertisingComponent } from './features/contextual-advertising/contextual-advertising.component';
 import { ContextualUrlBoxComponent } from './features/contextual-advertising/contextual-url-box/contextual-url-box.component';
 import { ContextualServiceService } from '@app/features/contextual-advertising/contextual-service.service';
+import { ContextualPlayerComponent } from './features/contextual-advertising/contextual-player/contextual-player.component';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { ContextualServiceService } from '@app/features/contextual-advertising/c
   declarations: [AppComponent, SmokerDetectorComponent, UrlBoxComponent, PlayerComponent, MetadataEnhancementComponent,
     MetadataPlayerComponent, MetadataUrlBoxComponent, TagCloudComponent, SummaryComponent, ScoreBarComponent,
     ContextualAdvertisingComponent,
-    ContextualUrlBoxComponent],
+    ContextualUrlBoxComponent,
+    ContextualPlayerComponent],
 })
 export class AppModule { }

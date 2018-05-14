@@ -88,7 +88,6 @@ beta = 0.85
 penalty = 0.01
 num_tags = 20
 
-app.config["tax_names"] = ["Custom", "Amazon", "Ebay", "Sports", "Animals"]
 custom = ["plant", "geology", "natural", "transport", "person", "animal"]
 amazon = ["books", "movies", "electronics", "home", "food", "sports", "clothing", "automotive"]
 ebay = ["motors", "fashion", "electronics", "art", "home", "industrial", "sports", "music"]

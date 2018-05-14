@@ -87,19 +87,6 @@ beta = 0.85
 penalty = 0.01
 num_tags = 20
 
-app.config["tax_names"] = ["Custom", "Amazon", "Ebay", "Sports", "Animals"]
-custom = ["plant", "geology", "natural", "transport", "person", "animal"]
-amazon = ["books", "movies", "electronics", "home", "food", "sports", "clothing", "automotive"]
-ebay = ["motors", "fashion", "electronics", "art", "home", "industrial", "sports", "music"]
-sports = ["golf", "baseball", "football", "rugby", "volleyball", "tennis", "basketball", "ski"]
-animals = ["mammal", "reptile", "avian", "fish", "insect"]
-tax = {"Custom": custom, "Amazon": amazon, "Ebay": ebay, "Sports": sports, "Animals": animals}
-length = 0
-for key in tax.keys():
-    if len(tax[key]) > length:
-        length = len(tax[key])
-app.config["length"] = length
-
 
 def number_key(name):
     parts = re.findall('[^0-9]+|[0-9]+', name)
@@ -170,7 +157,6 @@ def handle_url():
     tag_buffer_db.flushdb()
     summary.flushdb()
     total_tags.flushdb()
-    edl_tags.flushdb()
     clear_tmp_images()
     video_url = request.json['video']
     video_name = video_url[video_url.rfind('?v=') + 3:]
@@ -206,9 +192,11 @@ def start_classification():
             image_path = data[0]
             response, banner = classify_image("tmp/" + image_path)
             time_stamp = (i / float(fps))
-            if not tag_buffer_db.set(i, json.dumps(["{0:.4f}".format(time_stamp), response, banner])):
+            if not tag_buffer_db.set(i, json.dumps({'time': "{0:.4f}".format(time_stamp), 'tags': response,
+                                                    'banner': banner})):
                 print("An error occurred and the dictionary could not be saved")
             os.remove("tmp/" + image_path)
+            i += 1
     global semaphore
     semaphore = False
     print("All images classified")

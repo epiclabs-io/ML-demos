@@ -7,7 +7,19 @@
           <mat-card-subtitle>Machine learning contextual advertising demo</mat-card-subtitle>
           <mat-card-content>
             <app-contextual-url-box></app-contextual-url-box>
-            <mat-spinner></mat-spinner>
+            <mat-spinner *ngIf="!youtubeURL == started"></mat-spinner>
+          </mat-card-content>
+        </mat-card>
+        <mat-card *ngIf="finished" class="box-shadow mb-4 about-me">
+          <mat-card-title>Summary of the video:</mat-card-title>
+          <mat-card-content>
+            <!--<app-summary></app-summary>-->
+          </mat-card-content>
+        </mat-card>
+        <mat-card class="box-shadow mb-4 about-me" *ngIf="youtubeURL">
+          <mat-card-content>
+            <app-contextual-player (dataExport)="exportCloud($event)" (finishedExport)="exportFinished($event)" (startedExport)="exportStarted($event)" [youtubeURL]="youtubeURL" class="embed-responsive embed-responsive-16by9"></app-contextual-player>
+            <app-angular-tag-cloud [data]="cloudData" [height]=400 [width]=1000></app-angular-tag-cloud>
           </mat-card-content>
         </mat-card>
       </div>
