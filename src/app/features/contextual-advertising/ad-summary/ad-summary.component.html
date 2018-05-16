@@ -1,3 +1,5 @@
-<p>
-  ad-summary works!
-</p>
+<div class="row">
+  <div class="col-4" *ngFor="let ad of banner">
+    <app-ad-banner [setImage]="ad.image" [setPrice]="ad.price" [setUrl]="ad.url"></app-ad-banner>
+  </div>
+</div>

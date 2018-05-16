@@ -24,7 +24,7 @@ export class ContextualPlayerComponent implements OnInit {
   @Output() bannerExport = new EventEmitter<IBanner[]>()
   @Input()
   set youtubeURL(youtubeURL: string) {
-    setTimeout( this.loadVideo.bind(this, youtubeURL), 5000);
+    setTimeout( this.loadVideo.bind(this, youtubeURL), 45000);
     this.contextualService.returnClassification();
   }
 

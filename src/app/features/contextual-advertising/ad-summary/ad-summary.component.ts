@@ -7,14 +7,12 @@ import {ContextualServiceService, IBanner} from '@app/features/contextual-advert
   styleUrls: ['./ad-summary.component.scss']
 })
 export class AdSummaryComponent implements OnInit {
-  public summary: {};
-  public taxonomy: {};
-  public objectKeys = Object.keys;
+  public banner: IBanner[];
   constructor(private metadataService: ContextualServiceService) { }
 
   ngOnInit() {
     this.metadataService.getSummary().subscribe((result: IBanner[]) => {
-      console.log(result);
+      this.banner = result;
     });
   }
 }

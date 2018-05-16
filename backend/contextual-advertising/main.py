@@ -222,10 +222,8 @@ def return_summary():
         total_tags_to_order[tag] = "{0:.6f}".format(float(summary.get(tag)))
     sorted_tags = sorted(total_tags_to_order.items(), key=operator.itemgetter(1), reverse=True)
     summary_tags = []
-    for j in range(3):
+    for j in range(6):
         main_tag = re.split(',', sorted_tags[j][0])[0]
-        print(main_tag)
-        print(summary_tags)
         if tag_to_banner_db.exists(main_tag):
             banner = json.loads(tag_to_banner_db.get(main_tag))
         else:
