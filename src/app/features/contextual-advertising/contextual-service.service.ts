@@ -29,9 +29,9 @@ export class ContextualServiceService {
     });
   }
 
-  // public getSummary (): Observable<Object> {
-  //   return this.http.get(this.apiUrl + 'returnSummary');
-  // }
+  public getSummary (): Observable<Object> {
+    return this.http.get(this.apiUrl + 'returnSummary');
+  }
 }
 
 interface IClassificationResponse {

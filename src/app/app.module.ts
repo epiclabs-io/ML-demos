@@ -24,6 +24,7 @@ import { ContextualUrlBoxComponent } from './features/contextual-advertising/con
 import { ContextualServiceService } from '@app/features/contextual-advertising/contextual-service.service';
 import { ContextualPlayerComponent } from './features/contextual-advertising/contextual-player/contextual-player.component';
 import { AdBannerComponent } from '@app/features/components/ad-banner/ad-banner.component';
+import { AdSummaryComponent } from './features/contextual-advertising/ad-summary/ad-summary.component';
 
 
 @NgModule({
@@ -47,6 +48,6 @@ import { AdBannerComponent } from '@app/features/components/ad-banner/ad-banner.
   bootstrap: [AppComponent],
   declarations: [AppComponent, SmokerDetectorComponent, UrlBoxComponent, PlayerComponent, MetadataEnhancementComponent,
     MetadataPlayerComponent, MetadataUrlBoxComponent, TagCloudComponent, SummaryComponent, ScoreBarComponent,
-    ContextualAdvertisingComponent, ContextualUrlBoxComponent, ContextualPlayerComponent, AdBannerComponent],
+    ContextualAdvertisingComponent, ContextualUrlBoxComponent, ContextualPlayerComponent, AdBannerComponent, AdSummaryComponent],
 })
 export class AppModule { }

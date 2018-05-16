@@ -223,7 +223,16 @@ def return_summary():
     sorted_tags = sorted(total_tags_to_order.items(), key=operator.itemgetter(1), reverse=True)
     summary_tags = []
     for j in range(3):
-        summary_tags.append(json.loads(tag_to_banner_db.get(re.split(',', sorted_tags[j][0])[0])))
+        main_tag = re.split(',', sorted_tags[j][0])[0]
+        print(main_tag)
+        print(summary_tags)
+        if tag_to_banner_db.exists(main_tag):
+            banner = json.loads(tag_to_banner_db.get(main_tag))
+        else:
+            amazon_response = get_direct_item(main_tag)
+            banner = get_url_image_price(amazon_response, directSearch=True)
+            tag_to_banner_db.set(main_tag, json.dumps(banner))
+        summary_tags.append(banner)
     return Response(json.dumps(summary_tags))
 
 
