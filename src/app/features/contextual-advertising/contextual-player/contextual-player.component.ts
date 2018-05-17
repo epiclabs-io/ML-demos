@@ -61,6 +61,7 @@ export class ContextualPlayerComponent implements OnInit {
         if (!this.finished) {
           this.finished = true;
           this.finishedExport.emit(this.finished);
+          this.startedExport.emit(false);
           clearInterval(this.interval);
         }
       }

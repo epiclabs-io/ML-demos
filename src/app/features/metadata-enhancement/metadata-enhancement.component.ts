@@ -28,6 +28,9 @@ export class MetadataEnhancementComponent implements OnInit {
 
   public exportFinished(finished: boolean) {
     this.finished = finished;
+    if (finished) {
+      this.youtubeURL = '';
+    }
   }
 
   public exportStarted(started: boolean) {
