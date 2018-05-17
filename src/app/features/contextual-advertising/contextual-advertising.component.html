@@ -2,12 +2,12 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <mat-card class="box-shadow mb-4 about-me">
+        <mat-card class="box-shadow mb-4 about-me main">
           <mat-card-title>Epic Labs Machine Learning</mat-card-title>
           <mat-card-subtitle>Machine learning contextual advertising demo</mat-card-subtitle>
           <mat-card-content>
             <app-contextual-url-box></app-contextual-url-box>
-            <mat-spinner *ngIf="!youtubeURL == started"></mat-spinner>
+            <mat-progress-bar *ngIf="!youtubeURL == started" color="accent" mode="indeterminate"></mat-progress-bar>
           </mat-card-content>
         </mat-card>
         <mat-card *ngIf="finished" class="box-shadow mb-4 about-me">
