@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ContextualServiceService, IBanner} from '@app/features/contextual-advertising/contextual-service.service';
+import { ContextualServiceService, IBanner } from '@app/features/contextual-advertising/contextual-service.service';
 import { CloudData } from '@app/features/components/tag-cloud/tag-cloud.interfaces';
 
 @Component({

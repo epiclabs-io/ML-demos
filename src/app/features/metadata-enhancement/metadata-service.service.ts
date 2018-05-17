@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
@@ -8,8 +8,8 @@ export class MetadataServiceService {
   private apiUrl = 'http://localhost:6006/api/v1/';
   public edlUrl = this.apiUrl + 'editlist.edl';
   private scores: IScoreTS[] = [];
-  public youtubeURL$ = new BehaviorSubject<string>('');
-  public scores$ = new BehaviorSubject<IScoreTS[]>([]);
+  public youtubeURL$ = new Subject<string>();
+  public scores$ = new Subject<IScoreTS[]>();
   constructor(private http: HttpClient) { }
 
   public postUrl (url: string): void {
