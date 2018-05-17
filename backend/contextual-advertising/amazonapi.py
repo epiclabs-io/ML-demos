@@ -70,7 +70,7 @@ def get_url_image_price(response, directSearch=False):
     try:
         price = response["ItemAttributes"]["ListPrice"]["FormattedPrice"]
     except KeyError:
-        price = 0
+        price = "-"
     return {'url': url, 'image': image, 'price': price}
 
 
